@@ -27,8 +27,8 @@ public class HelloWorldApplication implements ApplicationRunner {
   }
 
 
-  @GetMapping("/user/{name}")
-  public User getUser(@PathVariable String name) {
+  @GetMapping("/user")
+  public User getUser(@RequestParam String name) {
     return userRepository.findByName(name);
   }
 
