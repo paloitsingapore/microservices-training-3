@@ -11,5 +11,6 @@
     <description>Demo project for Microservices</description>
 
     <modules>
+	<module>hello-world</module>
     </modules>
 </project>
