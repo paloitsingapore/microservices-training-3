@@ -14,6 +14,7 @@
 	      <module>hello-world</module>
 	      <module>item-service</module>
 	      <module>eureka-server</module>
-      <module>order-service</module>
+          <module>order-service</module>
+          <module>edge-service</module>
     </modules>
 </project>

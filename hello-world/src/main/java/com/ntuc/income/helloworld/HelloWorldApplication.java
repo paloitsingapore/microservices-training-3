@@ -21,13 +21,13 @@ public class HelloWorldApplication implements ApplicationRunner {
     SpringApplication.run(HelloWorldApplication.class, args);
   }
 
-  @GetMapping("/greet/{name}")
+  @GetMapping("/users/greet/{name}")
   public String greet(@PathVariable String name) {
     return "Hello " + name + "!";
   }
 
 
-  @GetMapping("/user")
+  @GetMapping("/users")
   public User getUser(@RequestParam String name) {
     return userRepository.findByName(name);
   }

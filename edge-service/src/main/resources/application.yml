@@ -1,0 +1,20 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name: edge-service
+
+zuul:
+  routes:
+    item-service:
+      path: /items/**
+      serviceId: item-service
+      stripPrefix: false
+    order-service:
+      path: /order/**
+      serviceId: order-service
+      stripPrefix: false
+
+logging:
+  level.org.springframework: trace
