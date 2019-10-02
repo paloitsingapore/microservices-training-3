@@ -18,3 +18,9 @@ zuul:
 
 logging:
   level.org.springframework: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
