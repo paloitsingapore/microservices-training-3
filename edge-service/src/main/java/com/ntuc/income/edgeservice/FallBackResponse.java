@@ -13,52 +13,52 @@ import java.io.InputStream;
 
 public class FallBackResponse implements FallbackProvider {
 
-    @Override
-    public String getRoute() {
-        return "item-service";
+  @Override
+  public String getRoute() {
+    return "item-service";
+  }
+
+  @Override
+  public ClientHttpResponse fallbackResponse(String route, final Throwable cause) {
+    if (cause instanceof HystrixTimeoutException) {
+      return response(HttpStatus.GATEWAY_TIMEOUT);
+    } else {
+      return response(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
 
-    @Override
-    public ClientHttpResponse fallbackResponse(String route, final Throwable cause) {
-        if (cause instanceof HystrixTimeoutException) {
-            return response(HttpStatus.GATEWAY_TIMEOUT);
-        } else {
-            return response(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+  private ClientHttpResponse response(final HttpStatus status) {
+    return new ClientHttpResponse() {
+      @Override
+      public HttpStatus getStatusCode() throws IOException {
+        return status;
+      }
 
-    private ClientHttpResponse response(final HttpStatus status) {
-        return new ClientHttpResponse() {
-            @Override
-            public HttpStatus getStatusCode() throws IOException {
-                return status;
-            }
+      @Override
+      public int getRawStatusCode() throws IOException {
+        return status.value();
+      }
 
-            @Override
-            public int getRawStatusCode() throws IOException {
-                return status.value();
-            }
+      @Override
+      public String getStatusText() throws IOException {
+        return status.getReasonPhrase();
+      }
 
-            @Override
-            public String getStatusText() throws IOException {
-                return status.getReasonPhrase();
-            }
+      @Override
+      public void close() {
+      }
 
-            @Override
-            public void close() {
-            }
+      @Override
+      public InputStream getBody() throws IOException {
+        return new ByteArrayInputStream("Item Service is down. Contact Support".getBytes());
+      }
 
-            @Override
-            public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("Item Service is down. Contact Support".getBytes());
-            }
-
-            @Override
-            public HttpHeaders getHeaders() {
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.APPLICATION_JSON);
-                return headers;
-            }
-        };
-    }
+      @Override
+      public HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return headers;
+      }
+    };
+  }
 }

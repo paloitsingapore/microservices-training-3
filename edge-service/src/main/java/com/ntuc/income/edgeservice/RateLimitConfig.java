@@ -12,7 +12,7 @@ public class RateLimitConfig {
   }
 
   @Bean
-  RateLimitingFilter rateLimitingFilter(){
+  RateLimitingFilter rateLimitingFilter() {
     return new RateLimitingFilter();
   }
 }

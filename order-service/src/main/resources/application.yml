@@ -1,0 +1,21 @@
+server.port: 8083
+info: Order service
+
+
+spring:
+  application:
+    name: order-service
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ark-01.srvs.cloudkafka.com:9094,ark-02.srvs.cloudkafka.com:9094,ark-03.srvs.cloudkafka.com:9094
+          configuration:
+            security.protocol: SASL_SSL
+            sasl:
+              mechanism: SCRAM-SHA-256
+              jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="omvklicl" password="${KAFKA_PASSWORD}";
+      bindings:
+        output:
+          destination: omvklicl-order
+          group: order-group

@@ -26,12 +26,10 @@ public class HelloWorldApplication implements ApplicationRunner {
     return "Hello " + name + "!";
   }
 
-
   @GetMapping("/users")
   public User getUser(@RequestParam String name) {
     return userRepository.findByName(name);
   }
-
 
   @Override public void run(ApplicationArguments args) throws Exception {
     userRepository.save(new User("john", 33));
