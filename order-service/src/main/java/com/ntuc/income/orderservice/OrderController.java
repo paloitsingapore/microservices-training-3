@@ -2,17 +2,13 @@ package com.ntuc.income.orderservice;
 
 import java.net.URI;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +18,11 @@ public class OrderController {
 
   @Autowired ItemService itemService;
   @Autowired LoadBalancerClient loadBalancerClient;
+
+  @GetMapping("/greet")
+  public String greet(){
+    return "Hello World!";
+  }
 
   @GetMapping("/order/items")
   public ResponseEntity<List<String>> getItems(){

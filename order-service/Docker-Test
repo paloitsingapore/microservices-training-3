@@ -1,0 +1,3 @@
+FROM order-service:0.0.1
+EXPOSE 8083
+ENTRYPOINT ["java", "-jar", "app.jar"]
