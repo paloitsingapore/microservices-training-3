@@ -16,5 +16,6 @@
 	      <module>eureka-server</module>
           <module>order-service</module>
           <module>edge-service</module>
+          <module>configuration-server</module>
     </modules>
 </project>
